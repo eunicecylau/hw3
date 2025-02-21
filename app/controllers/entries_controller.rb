@@ -2,6 +2,7 @@ class EntriesController < ApplicationController
 
   def new
     render :template => "entries/new"
+    @place = Place.find_by({ "id" => params["place_id"] })
   end
 
   def create
@@ -11,6 +12,6 @@ class EntriesController < ApplicationController
     @entry["occurred_on"] = params["occurred_on"]
     @entry["place_id"] = params["place_id"]    
     @entry.save
-    redirect_to "/journals/show"
+    redirect_to "/places/#{@entry["place_id"]}"
   end
 end

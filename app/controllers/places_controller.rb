@@ -1,23 +1,23 @@
-class JournalsController < ApplicationController
+class PlacesController < ApplicationController
  
   def index
     @places = Place.all
   end
 
   def new
-    render :template => "journals/new"
+    render :template => "places/new"
   end
 
   def create
     @place = Place.new
     @place.name = params["name"]
     @place.save
-    redirect_to "/journals"
+    redirect_to "/places"
   end
 
   def show
     @place = Place.find_by({"id" => params["id"]})
-    @entries = Place.where({"id" => params["place_id"]})
+    @entries = Entry.where({ "place_id" => @place["id"] })
 
   end
 
